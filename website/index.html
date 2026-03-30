@@ -35,6 +35,54 @@
     "publisher": { "@type": "Organization", "name": "Notifikations", "url": "https://notifikations.com" }
   }
   </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Do I need an account or API key to use Notifikations?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No. There are no accounts, no sign-ups, and no API keys. Install the app, copy your webhook URL, and start sending. The secret embedded in the URL is the only credential." }
+      },
+      {
+        "@type": "Question",
+        "name": "What can I include in a notification?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Every notification requires a message. You can also set a custom title, subtitle, sound, interruption level (active, time-sensitive, passive, or critical), a deep-link URL that opens when tapped, and an image URL that appears inline. Pass these as JSON fields in a POST body or as query parameters on a GET request." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does Notifikations work on iPad or Mac?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. The app runs on iPhone, iPad, and Mac (via Mac Catalyst). All devices signed in to the same iCloud account share a user webhook URL that fans out notifications to all of them simultaneously." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Notifikations free?",
+        "acceptedAnswer": { "@type": "Answer", "text": "You get a 14-day free trial with full functionality. After the trial, a Pro subscription is required to continue receiving notifications. The trial starts the moment you register your first device — no payment information needed upfront." }
+      },
+      {
+        "@type": "Question",
+        "name": "How is my privacy protected?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Your raw webhook secret is generated on-device, stored in your Keychain, and synced only to your private iCloud. The server stores only a SHA-256 digest — it never sees the secret itself. Notification contents are never logged or stored on the server; history exists on your device only." }
+      },
+      {
+        "@type": "Question",
+        "name": "What happens if my webhook URL leaks?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Open the app and tap Rotate Secret. Your old URL stops working immediately and you get a new one. Your device registration and Pro status carry over — nothing else changes." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I use Notifikations from GitHub Actions, CI pipelines, or servers?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — that is the primary use case. Any environment that can make an HTTP request works: curl, wget, Python requests, Node fetch, GitHub Actions steps, cron jobs, Bash scripts, and more. See the Guides page for copy-paste examples." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does it support GET requests, or only POST?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Both. GET requests pass fields as query parameters (e.g. ?message=Done&title=Build). POST requests accept a plain-text body, a JSON object, or form-encoded data. GET is handy for simple browser bookmarks or monitoring URLs." }
+      }
+    ]
+  }
+  </script>
 
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -96,33 +144,50 @@
     </div>
   </div>
 
-  <h2>What you can send</h2>
-  <div class="cards">
-    <div class="card">
-      <div class="card-icon">📝</div>
-      <h3>Plain text</h3>
-      <p>Just pipe any string as the request body.</p>
-    </div>
-    <div class="card">
-      <div class="card-icon">🔔</div>
-      <h3>Custom title &amp; sound</h3>
-      <p>Full control over the notification presentation.</p>
-    </div>
-    <div class="card">
-      <div class="card-icon">🔗</div>
-      <h3>Deep link</h3>
-      <p>Tap to open a URL directly from the notification.</p>
-    </div>
-    <div class="card">
-      <div class="card-icon">🖼️</div>
-      <h3>Image</h3>
-      <p>Attach a remote image that appears in the notification.</p>
-    </div>
-  </div>
+  <h2>FAQ</h2>
+  <div class="faq">
 
-  <h2>Privacy first</h2>
-  <p>The backend only stores your device's APNs push token and a SHA-256 digest of your webhook secret. Your raw secret is generated on-device and stored in your private iCloud — the server never sees it.</p>
-  <p>Notification contents are never logged or persisted. History lives on your device only. <a href="privacy.html">Read the full privacy policy →</a></p>
+    <details class="faq-item">
+      <summary>Do I need an account or API key?</summary>
+      <p>No accounts, no sign-ups, no API keys. Install the app, copy your webhook URL, and start sending. The secret embedded in the URL is the only credential.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary>What can I include in a notification?</summary>
+      <p>Every request requires a <code>message</code>. You can also set a <code>title</code>, <code>subtitle</code>, <code>sound</code>, <code>interruption-level</code> (active, time-sensitive, passive, or critical), an <code>open_url</code> that launches when tapped, and an <code>image_url</code> that appears inline. Pass fields as JSON in a POST body, or as query parameters on a GET request.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary>Does it work on iPad and Mac?</summary>
+      <p>Yes. The app runs on iPhone, iPad, and Mac (via Mac Catalyst). All devices on the same iCloud account share a user webhook URL that fans out to all of them at once.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary>Is Notifikations free?</summary>
+      <p>You get a 14-day free trial with full functionality — no payment information needed upfront. After the trial, a Pro subscription is required to keep receiving notifications.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary>How is my privacy protected?</summary>
+      <p>Your raw secret is generated on-device, stored in your Keychain, and synced only to your private iCloud. The server stores only a SHA-256 digest — it never sees the secret itself. Notification contents are never logged or stored server-side; history exists on your device only. <a href="privacy.html">Read the full privacy policy →</a></p>
+    </details>
+
+    <details class="faq-item">
+      <summary>What if my webhook URL leaks?</summary>
+      <p>Open the app and tap <strong>Rotate Secret</strong>. Your old URL stops working instantly and you get a fresh one. Device registration and Pro status carry over automatically.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary>Can I use it from GitHub Actions, CI pipelines, or servers?</summary>
+      <p>Yes — that is the primary use case. Any environment that can make an HTTP request works: curl, wget, Python, Node, GitHub Actions steps, cron jobs, Bash scripts, and more. See the <a href="guides.html">Guides</a> for copy-paste examples.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary>Does it support GET requests, or only POST?</summary>
+      <p>Both. GET passes fields as query parameters (e.g. <code>?message=Done&amp;title=Build</code>). POST accepts a plain-text body, JSON, or form-encoded data. GET is handy for browser bookmarks or simple monitoring URLs.</p>
+    </details>
+
+  </div>
 </main>
 
 <footer>
