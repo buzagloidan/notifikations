@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>API Reference — Notifikations</title>
+  <meta name="description" content="Full API reference for Notifikations. Send iPhone push notifications via POST or GET with plain text, JSON payloads, custom sounds, deep links, and images.">
+  <link rel="canonical" href="https://notifikations.com/docs.html">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://notifikations.com/docs.html">
+  <meta property="og:title" content="API Reference — Notifikations">
+  <meta property="og:description" content="Full API reference for Notifikations. Send iPhone push notifications via POST or GET with plain text, JSON payloads, custom sounds, deep links, and images.">
+  <meta property="og:image" content="https://notifikations.com/og.png">
+  <meta property="og:site_name" content="Notifikations">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="API Reference — Notifikations">
+  <meta name="twitter:description" content="Full API reference for Notifikations. Send iPhone push notifications via POST or GET with plain text, JSON payloads, custom sounds, deep links, and images.">
+  <meta name="twitter:image" content="https://notifikations.com/og.png">
+
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "name": "Notifikations API Reference",
+    "description": "Full API reference for sending iPhone push notifications via HTTP.",
+    "url": "https://notifikations.com/docs.html",
+    "isPartOf": { "@type": "WebSite", "name": "Notifikations", "url": "https://notifikations.com" },
+    "breadcrumb": {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://notifikations.com/" },
+        { "@type": "ListItem", "position": 2, "name": "API Reference", "item": "https://notifikations.com/docs.html" }
+      ]
+    }
+  }
+  </script>
+
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">ntf<span>.</span></a>
+    <a href="docs.html" class="active">Docs</a>
+    <a href="guides.html">Guides</a>
+    <a href="how-it-works.html">How it works</a>
+    <a href="privacy.html">Privacy</a>
+  </div>
+</nav>
+
+<main>
+  <div class="hero" style="padding-bottom: 32px;">
+    <h1 style="font-size: clamp(32px,6vw,46px);">API Reference</h1>
+    <p>All endpoints are at <code>https://api.notifikations.com</code></p>
+  </div>
+
+  <h2>Send a notification</h2>
+
+  <p>This is the main webhook endpoint. The secret in the URL acts as the credential — no additional headers required.</p>
+
+  <div class="code-block">
+    <pre><span class="tag">POST</span>  /api/v1/<span class="hl">:secret</span>
+<span class="tag" style="background:var(--dark30)">GET</span>   /api/v1/<span class="hl">:secret</span>?message=Hello</pre>
+  </div>
+
+  <p>The <code>:secret</code> can be your <strong>device secret</strong> (sends to one device), your <strong>user secret</strong> (sends to all devices on your account), or a <strong><a href="#named-webhooks">named webhook secret</a></strong> (a custom-labelled URL you create).</p>
+
+  <h3>Request formats</h3>
+
+  <p><strong>Plain text</strong> — the entire body becomes the notification message:</p>
+  <div class="code-block"><pre><span class="kw">curl</span> -X POST https://api.notifikations.com/api/v1/YOUR_SECRET \
+  -d <span class="str">'Deploy succeeded ✅'</span></pre></div>
+
+  <p><strong>JSON</strong> — full control over all fields:</p>
+  <div class="code-block"><pre><span class="kw">curl</span> -X POST https://api.notifikations.com/api/v1/YOUR_SECRET \
+  -H <span class="str">'Content-Type: application/json'</span> \
+  -d <span class="str">'{"message":"Tests passed","title":"CI","sound":"cha_ching"}'</span></pre></div>
+
+  <p><strong>GET</strong> — useful for webhooks that only support GET:</p>
+  <div class="code-block"><pre><span class="kw">curl</span> <span class="str">"https://api.notifikations.com/api/v1/YOUR_SECRET?message=Hello&amp;title=Alert"</span></pre></div>
+
+  <h3>Payload fields</h3>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Field</th><th>Type</th><th>Description</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>message</code></td><td>string <span class="tag">required</span></td><td>The notification body text.</td></tr>
+        <tr><td><code>title</code></td><td>string</td><td>Bold title shown above the message.</td></tr>
+        <tr><td><code>subtitle</code></td><td>string</td><td>Secondary line below the title.</td></tr>
+        <tr><td><code>sound</code></td><td>string</td><td><code>default</code>, <code>none</code>, or a custom sound name (see below).</td></tr>
+        <tr><td><code>thread_id</code></td><td>string</td><td>Groups related notifications together in Notification Center.</td></tr>
+        <tr><td><code>open_url</code></td><td>string</td><td>URL opened when the notification is tapped.</td></tr>
+        <tr><td><code>image_url</code></td><td>string</td><td>Remote image displayed in the notification.</td></tr>
+        <tr><td><code>interruption-level</code></td><td>string</td><td><code>passive</code>, <code>active</code>, or <code>time-sensitive</code>.</td></tr>
+        <tr><td><code>filter-criteria</code></td><td>string</td><td>iOS Focus filter matching value.</td></tr>
+        <tr><td><code>expiration_date</code></td><td>ISO 8601</td><td>Deadline after which APNs discards the notification.</td></tr>
+        <tr><td><code>send_at</code></td><td>ISO 8601</td><td>Schedule the notification for a future time (up to 30 days). See <a href="#scheduled">Scheduled delivery</a>.</td></tr>
+        <tr><td><code>category</code></td><td>string</td><td>Show action buttons on the notification. See <a href="#actions">Interactive actions</a>.</td></tr>
+        <tr><td><code>callback_url</code></td><td>string</td><td>URL the app will POST to when the user taps an action button. See <a href="#actions">Interactive actions</a>.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Available sounds</h3>
+  <div class="callout">
+    <code>default</code> &nbsp;·&nbsp; <code>brrr</code> &nbsp;·&nbsp; <code>bell_ringing</code> &nbsp;·&nbsp;
+    <code>bubble_ding</code> &nbsp;·&nbsp; <code>cha_ching</code> &nbsp;·&nbsp;
+    <code>cat_meow</code> &nbsp;·&nbsp; <code>dog_barking</code> &nbsp;·&nbsp;
+    <code>door_bell</code> &nbsp;·&nbsp; <code>duck_quack</code> &nbsp;·&nbsp;
+    <code>upbeat_bells</code>
+  </div>
+
+  <h3>Response</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Status</th><th>Body</th><th>Meaning</th></tr></thead>
+      <tbody>
+        <tr><td><code>200</code></td><td><code>{"success":true,"apnsId":"…"}</code></td><td>Notification accepted by APNs.</td></tr>
+        <tr><td><code>200</code></td><td><code>{"success":true,"sent":2,"failures":0}</code></td><td>User secret fan-out result.</td></tr>
+        <tr><td><code>400</code></td><td><code>{"error":"message is required"}</code></td><td>Missing required field.</td></tr>
+        <tr><td><code>404</code></td><td><code>{"error":"webhook not found"}</code></td><td>Secret not registered.</td></tr>
+        <tr><td><code>502</code></td><td><code>{"error":"…"}</code></td><td>APNs rejected the notification.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="scheduled">Scheduled delivery</h2>
+
+  <p>Add a <code>send_at</code> field to any notification request to deliver it at a future time. The server stores the job and fires it automatically — your script or service does not need to stay running.</p>
+
+  <div class="code-block"><pre><span class="kw">curl</span> -X POST https://api.notifikations.com/api/v1/YOUR_SECRET \
+  -H <span class="str">'Content-Type: application/json'</span> \
+  -d <span class="str">'{"message":"Time to stand up","title":"Reminder","send_at":"2026-04-01T09:00:00.000Z"}'</span></pre></div>
+
+  <p>GET requests also support it:</p>
+  <div class="code-block"><pre><span class="kw">curl</span> <span class="str">"https://api.notifikations.com/api/v1/YOUR_SECRET?message=Hello&amp;send_at=2026-04-01T09:00:00.000Z"</span></pre></div>
+
+  <h3>Scheduled response</h3>
+  <div class="code-block"><pre>{ "success": true, "scheduled": true, "jobId": "uuid", "sendAt": "2026-04-01T09:00:00.000Z" }</pre></div>
+
+  <h3>Limits &amp; notes</h3>
+  <ul>
+    <li><code>send_at</code> must be a future ISO 8601 timestamp, within <strong>30 days</strong> from now.</li>
+    <li>Maximum <strong>10 pending scheduled jobs</strong> per webhook URL.</li>
+    <li>Delivery precision is approximately <strong>±1 minute</strong> (Cloudflare Cron resolution).</li>
+    <li>Pro/trial status is evaluated at <strong>fire time</strong>, not at scheduling time.</li>
+    <li>Scheduled notification content is stored on Cloudflare's infrastructure until sent, then deleted immediately. See the <a href="privacy.html">privacy policy</a>.</li>
+  </ul>
+
+  <h3>Scheduled response codes</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Status</th><th>Body</th><th>Meaning</th></tr></thead>
+      <tbody>
+        <tr><td><code>200</code></td><td><code>{"success":true,"scheduled":true,"jobId":"…","sendAt":"…"}</code></td><td>Job accepted and stored.</td></tr>
+        <tr><td><code>400</code></td><td><code>{"error":"send_at must be a valid future ISO 8601 timestamp"}</code></td><td>Timestamp is missing, malformed, or in the past.</td></tr>
+        <tr><td><code>400</code></td><td><code>{"error":"send_at cannot be more than 30 days in the future"}</code></td><td>Exceeds the 30-day limit.</td></tr>
+        <tr><td><code>429</code></td><td><code>{"error":"too_many_scheduled: max 10 pending jobs per webhook"}</code></td><td>Pending job cap reached.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="named-webhooks">Named webhooks</h2>
+
+  <p>By default your device secret and user secret are your webhook URLs. Named webhooks let you create additional, independently-labelled URLs — useful when you want separate endpoints for different tools or contexts ("CI", "Server", "Home automation") without sharing the same secret across all of them.</p>
+
+  <div class="callout">
+    <strong>Privacy note.</strong> Your named webhook secret is generated on your device and never sent to the server — only its SHA-256 digest is stored, exactly like your device and user secrets.
+  </div>
+
+  <h3>Create a named webhook</h3>
+
+  <div class="code-block"><pre><span class="tag">POST</span>  /api/v1/webhooks</pre></div>
+
+  <p>Generate a new secret locally (e.g. <code>ntf_ci_…</code>), hash it with SHA-256, and register the digest:</p>
+
+  <div class="code-block"><pre><span class="kw">curl</span> -X POST https://api.notifikations.com/api/v1/webhooks \
+  -H <span class="str">'Content-Type: application/json'</span> \
+  -d <span class="str">'{"deviceDigest":"&lt;sha256(deviceSecret)&gt;","deviceToken":"&lt;apnsToken&gt;","webhookDigest":"&lt;sha256(newSecret)&gt;","label":"CI","scope":"device"}'</span></pre></div>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><code>deviceDigest</code></td><td>string <span class="tag">required</span></td><td>SHA-256 digest of your device secret — proves ownership.</td></tr>
+        <tr><td><code>deviceToken</code></td><td>string <span class="tag">required</span></td><td>Your APNs device token — proves ownership.</td></tr>
+        <tr><td><code>webhookDigest</code></td><td>string <span class="tag">required</span></td><td>SHA-256 digest of the new secret you generated locally.</td></tr>
+        <tr><td><code>label</code></td><td>string <span class="tag">required</span></td><td>Human-readable name (max 64 chars).</td></tr>
+        <tr><td><code>scope</code></td><td>string</td><td><code>device</code> (default) — sends to this device only. <code>user</code> — fans out to all your devices.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>On success: <code>{"success":true}</code>. The new webhook URL is then <code>https://api.notifikations.com/api/v1/YOUR_NEW_SECRET</code> and behaves exactly like your regular webhook.</p>
+
+  <h3>List named webhooks</h3>
+
+  <div class="code-block"><pre><span class="tag" style="background:var(--dark30)">GET</span>   /api/v1/webhooks?deviceDigest=&lt;digest&gt;&amp;deviceToken=&lt;token&gt;</pre></div>
+
+  <p>Returns all named webhooks registered to a device:</p>
+  <div class="code-block"><pre>{
+  "webhooks": [
+    { "webhookDigest": "abc…", "label": "CI", "scope": "device", "createdAt": "2026-03-30T…" },
+    { "webhookDigest": "def…", "label": "Home", "scope": "user",   "createdAt": "2026-03-30T…" }
+  ]
+}</pre></div>
+
+  <h3>Delete a named webhook</h3>
+
+  <div class="code-block"><pre><span class="tag del">DELETE</span> /api/v1/webhooks/<span class="hl">:webhookDigest</span></pre></div>
+
+  <div class="code-block"><pre><span class="kw">curl</span> -X DELETE https://api.notifikations.com/api/v1/webhooks/&lt;webhookDigest&gt; \
+  -H <span class="str">'Content-Type: application/json'</span> \
+  -d <span class="str">'{"deviceDigest":"&lt;sha256(deviceSecret)&gt;","deviceToken":"&lt;apnsToken&gt;"}'</span></pre></div>
+
+  <p>Immediately invalidates the URL. The raw secret you generated was never stored, so there is nothing else to revoke.</p>
+
+  <h3>Limits &amp; notes</h3>
+  <ul>
+    <li>Maximum <strong>10 named webhooks per device</strong>.</li>
+    <li>Each named webhook has its own independent secret — rotating your device or user secret does not affect them.</li>
+    <li>Deleting or unregistering a device automatically deletes all named webhooks owned by that device.</li>
+    <li>Named webhook URLs support all the same payload fields and <a href="#scheduled">scheduled delivery</a> as regular webhooks.</li>
+    <li>Pro/trial status is checked at send time against the <strong>owner device</strong>.</li>
+  </ul>
+
+  <h2 id="actions">Interactive actions</h2>
+
+  <p>Add a <code>category</code> field to show tappable action buttons on the notification. When the user taps a button, the app POSTs the result to your <code>callback_url</code> — no server round-trip, no stored state.</p>
+
+  <h3>Categories</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>category</th><th>Buttons</th><th>Callback <code>action</code> values</th></tr></thead>
+      <tbody>
+        <tr><td><code>YES_NO</code></td><td>Yes · No</td><td><code>"yes"</code> · <code>"no"</code></td></tr>
+        <tr><td><code>APPROVE_DISMISS</code></td><td>Approve · Dismiss</td><td><code>"approve"</code> · <code>"dismiss"</code></td></tr>
+        <tr><td><code>CONFIRM</code></td><td>Confirm</td><td><code>"confirm"</code></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>Buttons run in the background — the app does not need to open for the callback to fire.</p>
+
+  <h3>Example — deployment approval</h3>
+  <div class="code-block"><pre><span class="kw">curl</span> -X POST https://api.notifikations.com/api/v1/YOUR_SECRET \
+  -H <span class="str">'Content-Type: application/json'</span> \
+  -d <span class="str">'{
+    "title": "Deployment",
+    "message": "Deploy to production?",
+    "category": "YES_NO",
+    "callback_url": "https://your-n8n.com/webhook/abc123"
+  }'</span></pre></div>
+
+  <p>When the user taps <strong>Yes</strong>, the app sends:</p>
+  <div class="code-block"><pre>POST https://your-n8n.com/webhook/abc123
+Content-Type: application/json
+
+{ "action": "yes" }</pre></div>
+
+  <div class="callout">
+    <strong>Privacy note.</strong> The <code>callback_url</code> is passed through to the APNs payload and never stored by the Notifikations server. The response travels directly from your device to the URL you provided — the Notifikations server is not in the loop. Only use webhooks from sources you trust; tapping an action will reveal your response and its timing to the callback server.
+  </div>
+
+  <h2>Register a device</h2>
+
+  <div class="code-block"><pre><span class="tag">POST</span>  /api/v1/register</pre></div>
+
+  <p>Called automatically by the iOS app on first launch and when the APNs token changes. Not intended for direct use.</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><code>deviceToken</code></td><td>string <span class="tag">required</span></td><td>Hex-encoded APNs device token.</td></tr>
+        <tr><td><code>deviceDigest</code></td><td>string <span class="tag">required</span></td><td>SHA-256 hex digest of the device secret.</td></tr>
+        <tr><td><code>userDigest</code></td><td>string <span class="tag">required</span></td><td>SHA-256 hex digest of the user secret.</td></tr>
+        <tr><td><code>label</code></td><td>string</td><td>Human-readable device name.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Rotate secrets</h2>
+
+  <div class="code-block"><pre><span class="tag">POST</span>  /api/v1/rotate</pre></div>
+
+  <p>Generates a new device webhook URL and immediately invalidates the old one. Called by the app — not intended for direct use.</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Field</th><th>Type</th></tr></thead>
+      <tbody>
+        <tr><td><code>oldDigest</code></td><td>string <span class="tag">required</span></td></tr>
+        <tr><td><code>newDigest</code></td><td>string <span class="tag">required</span></td></tr>
+        <tr><td><code>deviceToken</code></td><td>string <span class="tag">required</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Unregister a device</h2>
+
+  <div class="code-block"><pre><span class="tag del">DELETE</span> /api/v1/unregister</pre></div>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Field</th><th>Type</th></tr></thead>
+      <tbody>
+        <tr><td><code>deviceDigest</code></td><td>string <span class="tag">required</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</main>
+
+<footer>
+  <p>ntf · <a href="index.html">Home</a> · <a href="guides.html">Guides</a> · <a href="privacy.html">Privacy</a> · <a href="mailto:hello@notifikations.com">Contact</a></p>
+</footer>
+
+</body>
+</html>

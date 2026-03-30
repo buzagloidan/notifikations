@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Notifikations — iPhone Push Notifications via curl or HTTP</title>
+  <meta name="description" content="Send push notifications to your iPhone with a single curl command or HTTP request. No SDK, no app on the sender side. Works from scripts, CI pipelines, and servers.">
+  <link rel="canonical" href="https://notifikations.com/">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://notifikations.com/">
+  <meta property="og:title" content="Notifikations — iPhone Push Notifications via curl or HTTP">
+  <meta property="og:description" content="Send push notifications to your iPhone with a single curl command or HTTP request. No SDK, no app on the sender side.">
+  <meta property="og:image" content="https://notifikations.com/og.png">
+  <meta property="og:site_name" content="Notifikations">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Notifikations — iPhone Push Notifications via curl or HTTP">
+  <meta name="twitter:description" content="Send push notifications to your iPhone with a single curl command or HTTP request. No SDK, no app on the sender side.">
+  <meta name="twitter:image" content="https://notifikations.com/og.png">
+
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Notifikations",
+    "url": "https://notifikations.com",
+    "description": "Send push notifications to your iPhone with a single curl command or HTTP request. No SDK required on the sender side.",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "iOS",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "publisher": { "@type": "Organization", "name": "Notifikations", "url": "https://notifikations.com" }
+  }
+  </script>
+
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">ntf<span>.</span></a>
+    <a href="docs.html">Docs</a>
+    <a href="guides.html">Guides</a>
+    <a href="how-it-works.html">How it works</a>
+    <a href="privacy.html">Privacy</a>
+  </div>
+</nav>
+
+<main>
+  <section class="hero">
+    <h1>Push alerts<br>from <span>anywhere.</span></h1>
+    <p>Send a notification to your iPhone with a single HTTP request — from a script, a CI pipeline, a server, or a curl command in your terminal.</p>
+    <div class="hero-actions">
+      <a href="https://apps.apple.com/app/id6761267330" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Get the App</a>
+      <a href="docs.html" class="btn btn-outline">Read the docs</a>
+    </div>
+  </section>
+
+  <div class="code-block">
+    <pre><span class="cm"># Send a notification to your device</span>
+<span class="kw">curl</span> -X POST <span class="str">https://api.notifikations.com/api/v1/YOUR_SECRET</span> \
+  -d <span class="hl">'Build finished ✅'</span></pre>
+  </div>
+
+  <h2>How it works</h2>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <h3>Install the app</h3>
+        <p>The iOS app generates a unique webhook secret on-device and registers your device's push token with the backend. Your raw secret never leaves your device.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <h3>Copy your webhook URL</h3>
+        <p>You get two webhook URLs — one that targets only this device, and one that targets all devices signed in with the same iCloud account.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <h3>Send from anywhere</h3>
+        <p>POST to your URL with a plain text body, a JSON payload, or just query parameters. No API key, no auth header — the secret in the URL is the credential.</p>
+      </div>
+    </div>
+  </div>
+
+  <h2>What you can send</h2>
+  <div class="cards">
+    <div class="card">
+      <div class="card-icon">📝</div>
+      <h3>Plain text</h3>
+      <p>Just pipe any string as the request body.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🔔</div>
+      <h3>Custom title &amp; sound</h3>
+      <p>Full control over the notification presentation.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🔗</div>
+      <h3>Deep link</h3>
+      <p>Tap to open a URL directly from the notification.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🖼️</div>
+      <h3>Image</h3>
+      <p>Attach a remote image that appears in the notification.</p>
+    </div>
+  </div>
+
+  <h2>Privacy first</h2>
+  <p>The backend only stores your device's APNs push token and a SHA-256 digest of your webhook secret. Your raw secret is generated on-device and stored in your private iCloud — the server never sees it.</p>
+  <p>Notification contents are never logged or persisted. History lives on your device only. <a href="privacy.html">Read the full privacy policy →</a></p>
+</main>
+
+<footer>
+  <p>ntf · <a href="docs.html">Docs</a> · <a href="guides.html">Guides</a> · <a href="privacy.html">Privacy</a> · <a href="mailto:hello@notifikations.com">Contact</a></p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,53 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Build outputs
+dist/
+build/
+.next/
+out/
+
+# Environment & secrets
+.env
+.env.*
+!.env.example
+*.p8
+*.pem
+*.key
+secrets/
+
+# Xcode
+ios/Notifications.xcodeproj/xcuserdata/
+ios/Notifications.xcodeproj/project.xcworkspace/xcuserdata/
+ios/*.xcarchive
+DerivedData/
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# macOS
+.DS_Store
+**/.DS_Store
+.AppleDouble
+.LSOverride
+
+# Wrangler
+.wrangler/
+
+# Xcode DerivedData (local build cache)
+.derivedData/
+
+# ASC / release tool state
+.asc/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo

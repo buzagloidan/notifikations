@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guides &amp; Integrations — Notifikations</title>
+  <meta name="description" content="How to send iPhone push notifications from Claude, Codex, cURL, GitHub Actions, Home Assistant, JavaScript, n8n, Python, Shortcuts, Zapier, OpenClaw, Base44, and more.">
+  <link rel="canonical" href="https://notifikations.com/guides.html">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://notifikations.com/guides.html">
+  <meta property="og:title" content="Guides &amp; Integrations — Notifikations">
+  <meta property="og:description" content="How to send iPhone push notifications from Claude, Codex, cURL, GitHub Actions, Home Assistant, JavaScript, n8n, Python, Shortcuts, Zapier, OpenClaw, Base44, and more.">
+  <meta property="og:image" content="https://notifikations.com/og.png">
+  <meta property="og:site_name" content="Notifikations">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Guides &amp; Integrations — Notifikations">
+  <meta name="twitter:description" content="How to send iPhone push notifications from Claude, Codex, cURL, GitHub Actions, Home Assistant, JavaScript, n8n, Python, Shortcuts, Zapier, OpenClaw, Base44, and more.">
+  <meta name="twitter:image" content="https://notifikations.com/og.png">
+
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "Notifikations Integration Guides",
+    "description": "Step-by-step guides for sending iPhone push notifications from Claude, Codex, cURL, GitHub Actions, Home Assistant, JavaScript, n8n, Python, Shortcuts, Zapier, OpenClaw, Base44, and more.",
+    "url": "https://notifikations.com/guides.html",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Claude Code", "url": "https://notifikations.com/guides.html#claude" },
+      { "@type": "ListItem", "position": 2, "name": "Codex CLI", "url": "https://notifikations.com/guides.html#codex" },
+      { "@type": "ListItem", "position": 3, "name": "cURL", "url": "https://notifikations.com/guides.html#curl" },
+      { "@type": "ListItem", "position": 4, "name": "GitHub Actions", "url": "https://notifikations.com/guides.html#github-actions" },
+      { "@type": "ListItem", "position": 5, "name": "Home Assistant", "url": "https://notifikations.com/guides.html#home-assistant" },
+      { "@type": "ListItem", "position": 6, "name": "JavaScript", "url": "https://notifikations.com/guides.html#javascript" },
+      { "@type": "ListItem", "position": 7, "name": "n8n", "url": "https://notifikations.com/guides.html#n8n" },
+      { "@type": "ListItem", "position": 8, "name": "Python", "url": "https://notifikations.com/guides.html#python" },
+      { "@type": "ListItem", "position": 9, "name": "Shortcuts", "url": "https://notifikations.com/guides.html#shortcuts" },
+      { "@type": "ListItem", "position": 10, "name": "Zapier", "url": "https://notifikations.com/guides.html#zapier" },
+      { "@type": "ListItem", "position": 11, "name": "OpenClaw", "url": "https://notifikations.com/guides.html#openclaw" },
+      { "@type": "ListItem", "position": 12, "name": "Base44", "url": "https://notifikations.com/guides.html#base44" }
+    ]
+  }
+  </script>
+
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">ntf<span>.</span></a>
+    <a href="docs.html">Docs</a>
+    <a href="guides.html" class="active">Guides</a>
+    <a href="how-it-works.html">How it works</a>
+    <a href="privacy.html">Privacy</a>
+  </div>
+</nav>
+
+<main>
+  <div class="hero" style="padding-bottom: 32px;">
+    <h1 style="font-size: clamp(32px,6vw,46px);">Guides &amp; Integrations</h1>
+    <p>Connect Notifikations to any tool, script, or automation — and get push notifications wherever your work happens.</p>
+  </div>
+
+  <h2 style="border-top:none; padding-top:0; margin-top:0;">Jump to an integration</h2>
+  <div class="integration-grid">
+    <a href="#claude" class="integration-chip">Claude Code</a>
+    <a href="#codex" class="integration-chip">Codex</a>
+    <a href="#curl" class="integration-chip">cURL</a>
+    <a href="#github-actions" class="integration-chip">GitHub Actions</a>
+    <a href="#home-assistant" class="integration-chip">Home Assistant</a>
+    <a href="#javascript" class="integration-chip">JavaScript</a>
+    <a href="#n8n" class="integration-chip">n8n</a>
+    <a href="#python" class="integration-chip">Python</a>
+    <a href="#shortcuts" class="integration-chip">Shortcuts</a>
+    <a href="#zapier" class="integration-chip">Zapier</a>
+    <a href="#openclaw" class="integration-chip">OpenClaw</a>
+    <a href="#base44" class="integration-chip">Base44</a>
+    <a href="#scripts" class="integration-chip">Shell scripts</a>
+    <a href="#uptime" class="integration-chip">Uptime monitor</a>
+  </div>
+
+  <!-- ── Claude Code ─────────────────────────────────────────── -->
+  <h2 id="claude">Claude Code</h2>
+  <p>Claude Code supports <strong>hooks</strong> — shell commands that run automatically when Claude starts a session, finishes a task, or triggers specific events. Wire Notifikations into a hook and you'll get an iPhone notification the moment Claude completes a long task, even if you've walked away from your machine.</p>
+  <p>Add a <code>Stop</code> hook to <code>~/.claude/settings.json</code> so every Claude session end triggers a push:</p>
+  <div class="code-block"><pre><span class="cm">// ~/.claude/settings.json</span>
+{
+  <span class="str">"hooks"</span>: {
+    <span class="str">"Stop"</span>: [
+      {
+        <span class="str">"matcher"</span>: <span class="str">""</span>,
+        <span class="str">"hooks"</span>: [
+          {
+            <span class="str">"type"</span>: <span class="str">"command"</span>,
+            <span class="str">"command"</span>: <span class="str">"curl -s -X POST https://api.notifikations.com/api/v1/YOUR_SECRET -H 'Content-Type: application/json' -d '{\"title\":\"Claude done\",\"message\":\"Task finished\"}'"</span>
+          }
+        ]
+      }
+    ]
+  }
+}</pre></div>
+  <p>You can also add a hook scoped to a specific project by placing a <code>settings.json</code> inside the project's <code>.claude/</code> folder — useful when you want notifications only for certain repos.</p>
+  <div class="callout">Hooks run in the background, so the notification arrives even if you've switched apps or locked your phone.</div>
+
+  <!-- ── Codex ────────────────────────────────────────────────── -->
+  <h2 id="codex">Codex CLI</h2>
+  <p>OpenAI Codex CLI runs agentic tasks in your terminal. Chain a curl call after any <code>codex</code> invocation to get notified when the agent finishes — especially useful for long refactors or multi-file generations you kick off and then step away from.</p>
+  <div class="code-block"><pre><span class="cm"># Run Codex, then notify when it exits</span>
+codex <span class="str">"refactor the auth module to use JWT"</span> && \
+  <span class="kw">curl</span> -s -X POST <span class="str">https://api.notifikations.com/api/v1/YOUR_SECRET</span> \
+    -H <span class="str">'Content-Type: application/json'</span> \
+    -d <span class="str">'{"title":"Codex done","message":"Refactor complete ✅"}'</span></pre></div>
+  <p>For a fire-and-forget wrapper, drop this function in your shell profile:</p>
+  <div class="code-block"><pre><span class="cm"># ~/.zshrc or ~/.bashrc</span>
+<span class="kw">function</span> ntf-codex() {
+  codex <span class="str">"$@"</span>
+  local status=$?
+  local msg=$(<span class="kw">[ $status -eq 0 ]</span> && echo <span class="str">"✅ Done"</span> || echo <span class="str">"❌ Failed"</span>)
+  <span class="kw">curl</span> -s -X POST <span class="str">https://api.notifikations.com/api/v1/YOUR_SECRET</span> \
+    -d <span class="str">"Codex: $msg — $1"</span>
+}</pre></div>
+  <p>Then just call <code>ntf-codex "your prompt here"</code>.</p>
+
+  <!-- ── cURL ─────────────────────────────────────────────────── -->
+  <h2 id="curl">cURL</h2>
+  <p>The fastest way to send a notification — no dependencies, works on any machine with curl installed. All you need is your secret from the app.</p>
+  <div class="code-block"><pre><span class="cm"># Plain text — simplest possible call</span>
+<span class="kw">curl</span> -X POST <span class="str">https://api.notifikations.com/api/v1/YOUR_SECRET</span> \
+  -d <span class="hl">'Deploy finished ✅'</span></pre></div>
+  <div class="code-block"><pre><span class="cm"># Custom title, message, and sound</span>
+<span class="kw">curl</span> -X POST <span class="str">https://api.notifikations.com/api/v1/YOUR_SECRET</span> \
+  -H <span class="str">'Content-Type: application/json'</span> \
+  -d <span class="str">'{
+    "title": "Build done",
+    "message": "All tests passed",
+    "sound": "brrr"
+  }'</span></pre></div>
+  <div class="code-block"><pre><span class="cm"># GET request — no body required (useful for webhooks)</span>
+<span class="kw">curl</span> <span class="str">"https://api.notifikations.com/api/v1/YOUR_SECRET?title=Alert&message=Disk+at+90%25"</span></pre></div>
+  <p>Append <code>-s</code> (silent) to suppress curl's progress output in scripts. See the <a href="docs.html">full docs</a> for all supported fields.</p>
+
+  <!-- ── GitHub Actions ────────────────────────────────────────── -->
+  <h2 id="github-actions">GitHub Actions</h2>
+  <p>Add a notification step at the end of any workflow to get push alerts for deployments, test results, or release events. Store your webhook secret in <strong>Settings → Secrets → Actions</strong> as <code>NTF_SECRET</code> — never hardcode it in the YAML.</p>
+  <div class="code-block"><pre><span class="cm"># .github/workflows/deploy.yml</span>
+<span class="hl">on:</span> [push]
+
+<span class="hl">jobs:</span>
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: npm ci && npm run build
+
+      - name: Notify on success
+        <span class="kw">if</span>: success()
+        run: |
+          <span class="kw">curl</span> -s -X POST <span class="str">"https://api.notifikations.com/api/v1/$\{{ secrets.NTF_SECRET }}"</span> \
+            -H <span class="str">'Content-Type: application/json'</span> \
+            -d <span class="str">'{"title":"Deploy succeeded","message":"$\{{ github.repository }} → $\{{ github.ref_name }} 🚀"}'</span>
+
+      - name: Notify on failure
+        <span class="kw">if</span>: failure()
+        run: |
+          <span class="kw">curl</span> -s -X POST <span class="str">"https://api.notifikations.com/api/v1/$\{{ secrets.NTF_SECRET }}"</span> \
+            -H <span class="str">'Content-Type: application/json'</span> \
+            -d <span class="str">'{"title":"Build failed ❌","message":"$\{{ github.repository }} on $\{{ github.ref_name }}"}'</span></pre></div>
+  <p>Works with any trigger — PRs, releases, scheduled runs, or manual <code>workflow_dispatch</code> events.</p>
+
+  <!-- ── Home Assistant ────────────────────────────────────────── -->
+  <h2 id="home-assistant">Home Assistant</h2>
+  <p>Home Assistant's <strong>RESTful command</strong> integration lets you call any HTTP endpoint from automations, scripts, and the action panel. Add Notifikations as a service and trigger it from any automation — motion detected, door left open, appliance cycle finished, you name it.</p>
+  <p>Add this to your <code>configuration.yaml</code>:</p>
+  <div class="code-block"><pre><span class="cm"># configuration.yaml</span>
+rest_command:
+  notifikations_send:
+    url: <span class="str">"https://api.notifikations.com/api/v1/YOUR_SECRET"</span>
+    method: POST
+    content_type: <span class="str">"application/json"</span>
+    payload: <span class="str">'{"title":"{{ title }}","message":"{{ message }}"}'</span></pre></div>
+  <p>Then call it from any automation or script:</p>
+  <div class="code-block"><pre><span class="cm"># automation.yaml (or via the UI editor)</span>
+automation:
+  - alias: <span class="str">"Washing machine done"</span>
+    trigger:
+      - platform: state
+        entity_id: sensor.washing_machine_power
+        to: <span class="str">"0"</span>
+        for: <span class="str">"00:01:00"</span>
+    action:
+      - service: rest_command.notifikations_send
+        data:
+          title: <span class="str">"Laundry done 👕"</span>
+          message: <span class="str">"Washing machine finished"</span></pre></div>
+  <div class="callout">Reload your Home Assistant config after editing (<strong>Developer Tools → YAML → Reload All YAML</strong>) and the service appears in the action picker.</div>
+
+  <!-- ── JavaScript ────────────────────────────────────────────── -->
+  <h2 id="javascript">JavaScript / Node.js</h2>
+  <p>Use the native <code>fetch</code> API — works in Node.js 18+, Deno, Bun, and any modern browser context without any dependencies.</p>
+  <div class="code-block"><pre><span class="kw">async function</span> notify(message, title) {
+  <span class="kw">await</span> fetch(<span class="str">"https://api.notifikations.com/api/v1/YOUR_SECRET"</span>, {
+    method: <span class="str">"POST"</span>,
+    headers: { <span class="str">"Content-Type"</span>: <span class="str">"application/json"</span> },
+    body: JSON.stringify({ message, title }),
+  });
+}
+
+<span class="cm">// Call it anywhere in your code</span>
+await notify(<span class="str">"Job finished"</span>, <span class="str">"Cron"</span>);</pre></div>
+  <p>Wrap it as a fire-and-forget helper so it never blocks your main flow:</p>
+  <div class="code-block"><pre><span class="kw">function</span> notifyAsync(message, title) {
+  fetch(<span class="str">"https://api.notifikations.com/api/v1/YOUR_SECRET"</span>, {
+    method: <span class="str">"POST"</span>,
+    headers: { <span class="str">"Content-Type"</span>: <span class="str">"application/json"</span> },
+    body: JSON.stringify({ message, title }),
+  }).catch(() => {}); <span class="cm">// silent — don't let a failed notification crash your app</span>
+}
+
+<span class="cm">// Hook into process exit for scripts</span>
+process.on(<span class="str">"exit"</span>, (code) => {
+  notifyAsync(code === 0 ? <span class="str">"Script finished ✅"</span> : <span class="str">"Script failed ❌"</span>, <span class="str">"Node.js"</span>);
+});</pre></div>
+
+  <!-- ── n8n ──────────────────────────────────────────────────── -->
+  <h2 id="n8n">n8n</h2>
+  <p>n8n's built-in <strong>HTTP Request</strong> node can call any webhook — no custom code required. Drop one at the end of any workflow to push a notification when automation runs complete, leads come in, or errors occur.</p>
+  <p><strong>Steps in the n8n editor:</strong></p>
+  <ol>
+    <li>Add an <strong>HTTP Request</strong> node at the end of your workflow.</li>
+    <li>Set <strong>Method</strong> to <code>POST</code>.</li>
+    <li>Set <strong>URL</strong> to <code>https://api.notifikations.com/api/v1/YOUR_SECRET</code>.</li>
+    <li>Under <strong>Body</strong>, choose <strong>JSON</strong> and enter your payload.</li>
+    <li>Save and activate the workflow.</li>
+  </ol>
+  <div class="code-block"><pre><span class="cm">// HTTP Request node — Body (JSON)</span>
+{
+  <span class="str">"title"</span>: <span class="str">"n8n workflow done"</span>,
+  <span class="str">"message"</span>: <span class="str">"{{ $json.summary }}"</span>
+}</pre></div>
+  <p>You can interpolate any expression from previous nodes in the message field — so the notification body can include record counts, names, or status codes from earlier steps.</p>
+  <div class="callout">Use the <strong>Error Trigger</strong> node + an HTTP Request to Notifikations to get push alerts whenever any workflow in your n8n instance fails.</div>
+
+  <!-- ── Python ────────────────────────────────────────────────── -->
+  <h2 id="python">Python</h2>
+  <p>No third-party packages required — the standard library is all you need.</p>
+  <div class="code-block"><pre><span class="kw">import</span> urllib.request, json
+
+<span class="kw">def</span> notify(message, title=<span class="str">None</span>, secret=<span class="str">"YOUR_SECRET"</span>):
+    url = <span class="str">f"https://api.notifikations.com/api/v1/{secret}"</span>
+    payload = {<span class="str">"message"</span>: message}
+    <span class="kw">if</span> title:
+        payload[<span class="str">"title"</span>] = title
+    data = json.dumps(payload).encode()
+    req = urllib.request.Request(url, data=data,
+          headers={<span class="str">"Content-Type"</span>: <span class="str">"application/json"</span>})
+    urllib.request.urlopen(req)
+
+<span class="cm"># Usage</span>
+notify(<span class="str">"Scrape finished — 4,201 records"</span>, title=<span class="str">"Crawler"</span>)</pre></div>
+  <p>For machine-learning or long-running data pipelines, add a decorator so you never forget a notification:</p>
+  <div class="code-block"><pre><span class="kw">import</span> functools, traceback
+
+<span class="kw">def</span> notify_when_done(title=<span class="str">"Script"</span>):
+    <span class="kw">def</span> decorator(fn):
+        @functools.wraps(fn)
+        <span class="kw">def</span> wrapper(*args, **kwargs):
+            <span class="kw">try</span>:
+                result = fn(*args, **kwargs)
+                notify(<span class="str">f"{fn.__name__} finished ✅"</span>, title=title)
+                <span class="kw">return</span> result
+            <span class="kw">except</span> Exception <span class="kw">as</span> e:
+                notify(<span class="str">f"{fn.__name__} failed: {e}"</span>, title=<span class="str">f"{title} ❌"</span>)
+                raise
+        <span class="kw">return</span> wrapper
+    <span class="kw">return</span> decorator
+
+<span class="cm"># Usage</span>
+@notify_when_done(title=<span class="str">"Training"</span>)
+<span class="kw">def</span> train_model():
+    <span class="cm"># ... your training code</span>
+    pass</pre></div>
+
+  <!-- ── Shortcuts ─────────────────────────────────────────────── -->
+  <h2 id="shortcuts">Apple Shortcuts</h2>
+  <p>The Shortcuts app can call any URL with a <strong>Get Contents of URL</strong> action — no code required. This is great for building personal automations that notify you from your iPhone or Mac itself, or as a trigger from Focus Filters, NFC tags, or widget taps.</p>
+  <p><strong>Build the shortcut:</strong></p>
+  <ol>
+    <li>Open the <strong>Shortcuts</strong> app and create a new shortcut.</li>
+    <li>Add a <strong>Get Contents of URL</strong> action.</li>
+    <li>Set the URL to <code>https://api.notifikations.com/api/v1/YOUR_SECRET</code>.</li>
+    <li>Set <strong>Method</strong> to <code>POST</code>.</li>
+    <li>Set <strong>Request Body</strong> to <strong>JSON</strong> and add keys: <code>title</code> and <code>message</code>.</li>
+    <li>Run the shortcut — the notification arrives instantly.</li>
+  </ol>
+  <div class="callout">Combine with <strong>Automation</strong> (time of day, location, app open) to build powerful personal alerts without writing a single line of code.</div>
+  <p>You can also call Notifikations from a Shortcut triggered by a <strong>Personal Automation</strong> — for example, notify yourself when you arrive somewhere, or send a reminder at a specific time.</p>
+
+  <!-- ── Zapier ─────────────────────────────────────────────────── -->
+  <h2 id="zapier">Zapier</h2>
+  <p>Use Zapier's built-in <strong>Webhooks by Zapier</strong> action to send a push notification as part of any Zap — triggered by Gmail, Stripe, Typeform, Airtable, or hundreds of other apps.</p>
+  <p><strong>Setup:</strong></p>
+  <ol>
+    <li>In your Zap, add an action step and search for <strong>Webhooks by Zapier</strong>.</li>
+    <li>Choose <strong>POST</strong> as the event.</li>
+    <li>Set the URL to <code>https://api.notifikations.com/api/v1/YOUR_SECRET</code>.</li>
+    <li>Set <strong>Payload Type</strong> to <strong>JSON</strong>.</li>
+    <li>Add the fields: <code>title</code> and <code>message</code> — you can map values from any earlier step.</li>
+    <li>Test the step and publish the Zap.</li>
+  </ol>
+  <div class="callout">Map dynamic fields from your trigger — for example, include a customer name from a Stripe payment event or a form submission from Typeform in the notification message.</div>
+
+  <!-- ── OpenClaw ───────────────────────────────────────────────── -->
+  <h2 id="openclaw">OpenClaw</h2>
+  <p>OpenClaw is a web scraping and monitoring platform. Use its built-in HTTP action or webhook output to fire a Notifikations push whenever a page changes, a price drops, or a scrape job finishes.</p>
+  <p>In any OpenClaw workflow that supports an outgoing webhook or HTTP action, point it at your Notifikations URL:</p>
+  <div class="code-block"><pre><span class="cm"># OpenClaw outgoing webhook / HTTP action config</span>
+URL:    <span class="str">https://api.notifikations.com/api/v1/YOUR_SECRET</span>
+Method: POST
+Headers:
+  Content-Type: application/json
+Body:
+  {
+    <span class="str">"title"</span>: <span class="str">"Price alert"</span>,
+    <span class="str">"message"</span>: <span class="str">"{{item.name}} dropped to {{item.price}}"</span>
+  }</pre></div>
+  <p>This way you get a push to your iPhone the moment OpenClaw detects the change — no need to keep checking a dashboard.</p>
+
+  <!-- ── Base44 ─────────────────────────────────────────────────── -->
+  <h2 id="base44">Base44</h2>
+  <p>Base44 is a no-code app builder. Any app you build in Base44 can call external APIs using its HTTP action block. Wire Notifikations into a button, form submission, or data trigger to send a push notification from your custom Base44 app.</p>
+  <p>In the Base44 action editor, add an <strong>HTTP Request</strong> block with these settings:</p>
+  <div class="code-block"><pre><span class="cm"># Base44 HTTP action settings</span>
+URL:    <span class="str">https://api.notifikations.com/api/v1/YOUR_SECRET</span>
+Method: POST
+Headers:
+  Content-Type: application/json
+Body (JSON):
+  {
+    <span class="str">"title"</span>: <span class="str">"New submission"</span>,
+    <span class="str">"message"</span>: <span class="str">"{{form.name}} submitted the form"</span>
+  }</pre></div>
+  <p>You can map any Base44 variable or field value into the message, so each notification contains the relevant context from your app's data.</p>
+
+  <!-- ── Shell scripts ─────────────────────────────────────────── -->
+  <h2 id="scripts">Shell scripts</h2>
+  <p>Append a curl call to any shell script to get notified when it finishes — whether it succeeds or fails. Good for training runs, data exports, backups, or any long-running process.</p>
+  <div class="code-block"><pre><span class="cm">#!/bin/bash</span>
+<span class="cm"># your long-running process</span>
+python train.py --epochs 50
+
+<span class="kw">if</span> [ $? -eq 0 ]; then
+  <span class="kw">curl</span> -s -X POST <span class="str">https://api.notifikations.com/api/v1/YOUR_SECRET</span> \
+    -H <span class="str">'Content-Type: application/json'</span> \
+    -d <span class="str">'{"title":"Training done","message":"Model finished ✅"}'</span>
+<span class="kw">else</span>
+  <span class="kw">curl</span> -s -X POST <span class="str">https://api.notifikations.com/api/v1/YOUR_SECRET</span> \
+    -d <span class="str">'Training failed ❌'</span>
+<span class="kw">fi</span></pre></div>
+  <p>Or define a reusable shell function and call it at the end of any script:</p>
+  <div class="code-block"><pre><span class="kw">function</span> ntf() {
+  <span class="kw">curl</span> -s -X POST <span class="str">https://api.notifikations.com/api/v1/YOUR_SECRET</span> \
+    -d <span class="str">"$1"</span>
+}
+
+<span class="cm"># Usage anywhere in the script</span>
+ntf <span class="str">"Backup complete"</span>
+ntf <span class="str">"Deployment finished 🚀"</span></pre></div>
+
+  <!-- ── Uptime monitor ────────────────────────────────────────── -->
+  <h2 id="uptime">Uptime monitor</h2>
+  <p>Ping your webhook from a cron job to get an iPhone alert whenever a service goes down.</p>
+  <div class="code-block"><pre><span class="cm">#!/bin/bash</span>
+<span class="cm"># crontab: */5 * * * * /path/to/check.sh</span>
+
+STATUS=$(<span class="kw">curl</span> -s -o /dev/null -w <span class="str">"%{http_code}"</span> https://myapp.example.com/health)
+
+<span class="kw">if</span> [ <span class="str">"$STATUS"</span> != <span class="str">"200"</span> ]; then
+  <span class="kw">curl</span> -s -X POST <span class="str">https://api.notifikations.com/api/v1/YOUR_SECRET</span> \
+    -H <span class="str">'Content-Type: application/json'</span> \
+    -d <span class="str">"{\"title\":\"Down!\",\"message\":\"myapp returned HTTP $STATUS\",\"sound\":\"brrr\"}"</span>
+<span class="kw">fi</span></pre></div>
+
+  <!-- ── Other snippets ────────────────────────────────────────── -->
+  <h2>Notification with a deep link</h2>
+  <p>Tapping the notification opens a URL directly in Safari (or your app).</p>
+  <div class="code-block"><pre><span class="kw">curl</span> -X POST <span class="str">https://api.notifikations.com/api/v1/YOUR_SECRET</span> \
+  -H <span class="str">'Content-Type: application/json'</span> \
+  -d <span class="str">'{
+    "title": "PR merged",
+    "message": "feat: dark mode support",
+    "open_url": "https://github.com/you/repo/pull/42"
+  }'</span></pre></div>
+
+  <h2>Fan-out to all devices</h2>
+  <p>Use your <strong>user secret</strong> (instead of the device secret) to send to every device on your iCloud account at once.</p>
+  <div class="code-block"><pre><span class="kw">curl</span> -X POST <span class="str">https://api.notifikations.com/api/v1/YOUR_USER_SECRET</span> \
+  -d <span class="str">'Sent to all your devices'</span></pre></div>
+  <p class="muted">The response includes a <code>sent</code> count: <code>{"success":true,"sent":2,"failures":0}</code></p>
+
+</main>
+
+<footer>
+  <p>ntf · <a href="index.html">Home</a> · <a href="docs.html">Docs</a> · <a href="privacy.html">Privacy</a> · <a href="mailto:hello@notifikations.com">Contact</a></p>
+</footer>
+
+<template id="copy-btn-tpl">
+  <button class="copy-btn" aria-label="Copy code to clipboard">
+    <svg viewBox="0 0 24 24" class="icon-copy"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"/></svg>
+    <svg viewBox="0 0 24 24" class="icon-success"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"/></svg>
+  </button>
+</template>
+<script>
+  var tpl = document.getElementById('copy-btn-tpl');
+  document.querySelectorAll('.code-block').forEach(function(block) {
+    var btn = tpl.content.cloneNode(true).querySelector('.copy-btn');
+    block.appendChild(btn);
+    btn.addEventListener('click', function() {
+      var text = block.querySelector('pre').innerText;
+      navigator.clipboard.writeText(text).then(function() {
+        btn.classList.add('copied');
+        setTimeout(function() { btn.classList.remove('copied'); }, 1800);
+      });
+    });
+  });
+</script>
+
+</body>
+</html>

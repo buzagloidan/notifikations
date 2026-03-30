@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy — Notifikations</title>
+  <meta name="description" content="Notifikations privacy policy. We store only a hash of your secret — never the raw value. Scheduled notification payloads are stored temporarily until delivered, then deleted.">
+  <link rel="canonical" href="https://notifikations.com/privacy.html">
+  <meta name="robots" content="noindex, follow">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://notifikations.com/privacy.html">
+  <meta property="og:title" content="Privacy Policy — Notifikations">
+  <meta property="og:description" content="Notifikations privacy policy. We store only a hash of your secret — never the raw value.">
+  <meta property="og:image" content="https://notifikations.com/og.png">
+  <meta property="og:site_name" content="Notifikations">
+
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">ntf<span>.</span></a>
+    <a href="docs.html">Docs</a>
+    <a href="guides.html">Guides</a>
+    <a href="how-it-works.html">How it works</a>
+    <a href="privacy.html" class="active">Privacy</a>
+  </div>
+</nav>
+
+<main>
+  <div class="hero" style="padding-bottom: 32px;">
+    <h1 style="font-size: clamp(32px,6vw,46px);">Privacy Policy</h1>
+    <p class="muted">Last updated: March 2026</p>
+  </div>
+
+  <h2>What we collect</h2>
+  <p>The backend stores the minimum data required to route push notifications to your device:</p>
+  <ul>
+    <li>Your device's <strong>APNs push token</strong> — provided by Apple, used to deliver notifications.</li>
+    <li>A <strong>SHA-256 digest</strong> of your device webhook secret and user webhook secret. These are one-way hashes; the raw secrets are never transmitted to or stored by the server.</li>
+    <li>An optional human-readable <strong>device label</strong> (e.g. "iPhone 15 Pro") that you choose.</li>
+  </ul>
+  <p>That is the complete list. No email address, no name, no account, no analytics.</p>
+
+  <h2>What we do not collect</h2>
+  <ul>
+    <li><strong>Notification contents</strong> — for instant delivery, the message, title, and any other payload fields pass through the server in-flight and are never logged or persisted. For <strong>scheduled notifications</strong>, the payload is stored in Cloudflare KV until the scheduled time, then deleted immediately upon delivery.</li>
+    <li><strong>Action responses</strong> — when you use the <code>callback_url</code> field (interactive action buttons), the <code>callback_url</code> is forwarded to your device inside the APNs payload and is never stored by this service. If you tap an action button, the app sends your response directly from your device to the URL you were sent — the Notifikations server is not involved. Only the sender of the notification and the operator of that URL will receive your response.</li>
+    <li><strong>Your raw webhook secret</strong> — generated on-device, stored in your private iCloud. The server only ever sees its SHA-256 hash.</li>
+    <li><strong>IP addresses or request metadata</strong> — requests are processed by Cloudflare Workers; no access logs are written by the application.</li>
+    <li><strong>Notification history</strong> — history is stored on your device only (via SwiftData). Deleting the app removes it.</li>
+  </ul>
+
+  <h2>Where data is stored</h2>
+  <p>Device records (APNs token + digests + label) are stored in <strong>Cloudflare KV</strong>, a globally-distributed key-value store operated by Cloudflare, Inc. Data is replicated across Cloudflare's edge network.</p>
+  <p>Your raw webhook secrets are synced across your own devices using <strong>iCloud CloudKit</strong> (Apple's private database). This data lives in your personal iCloud account and is inaccessible to us.</p>
+
+  <h2>How data is used</h2>
+  <p>The stored data has exactly one purpose: when a webhook request arrives at <code>/api/v1/:secret</code>, the server hashes the secret, looks up the corresponding APNs token, and forwards the notification to Apple's Push Notification service (APNs). Nothing else.</p>
+
+  <h2>Third parties</h2>
+  <ul>
+    <li><strong>Apple (APNs)</strong> — notifications are delivered via Apple's infrastructure. Apple's privacy policy governs their handling of push tokens.</li>
+    <li><strong>Cloudflare</strong> — the worker and KV storage run on Cloudflare's platform. Cloudflare may log metadata at the network layer per their own privacy policy.</li>
+  </ul>
+  <p>When the <code>callback_url</code> feature is used, the app contacts whatever server the notification sender specified. That server is outside Notifikations' control; its own privacy policy governs what it does with the data it receives.</p>
+  <p>There are no advertising networks, analytics SDKs, or data brokers involved.</p>
+
+  <h2>Data deletion</h2>
+  <p>You can remove your device's stored record at any time from within the app (Settings → Unregister device). This deletes the APNs token and both digests from Cloudflare KV. The device will stop receiving notifications immediately.</p>
+  <p>Deleting the iOS app removes all local notification history and your webhook secrets from iCloud.</p>
+
+  <h2>Security</h2>
+  <p>Webhook secrets are generated using a cryptographically secure random number generator (<code>SecRandomCopyBytes</code>) and are 32 characters long. Only their SHA-256 hash reaches the server, so a database breach would not expose your webhook URL.</p>
+  <p>All traffic between the app, the server, and APNs uses TLS.</p>
+
+  <h2>Children</h2>
+  <p>This service is not directed at children under 13. We do not knowingly collect data from minors.</p>
+
+  <h2>Changes</h2>
+  <p>If this policy changes materially, the updated date at the top will reflect that. Continued use of the service after changes constitutes acceptance.</p>
+
+  <h2>Contact</h2>
+  <p>Questions? Reach out at <a href="mailto:hello@notifikations.com">hello@notifikations.com</a>.</p>
+</main>
+
+<footer>
+  <p>ntf · <a href="index.html">Home</a> · <a href="docs.html">Docs</a> · <a href="guides.html">Guides</a></p>
+</footer>
+
+</body>
+</html>

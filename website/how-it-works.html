@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How It Works — Notifikations</title>
+  <meta name="description" content="How Notifikations works: your secret never leaves your device. The backend stores only an SHA-256 digest. Notification contents are never logged or persisted.">
+  <link rel="canonical" href="https://notifikations.com/how-it-works.html">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://notifikations.com/how-it-works.html">
+  <meta property="og:title" content="How It Works — Notifikations">
+  <meta property="og:description" content="How Notifikations works: your secret never leaves your device. The backend stores only an SHA-256 digest. Notification contents are never logged or persisted.">
+  <meta property="og:image" content="https://notifikations.com/og.png">
+  <meta property="og:site_name" content="Notifikations">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="How It Works — Notifikations">
+  <meta name="twitter:description" content="How Notifikations works: your secret never leaves your device. The backend stores only an SHA-256 digest. Notification contents are never logged or persisted.">
+  <meta name="twitter:image" content="https://notifikations.com/og.png">
+
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ── Delivery flow diagram ── */
+    .flow {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      background: var(--tan);
+      border-radius: var(--radius);
+      padding: 20px 24px;
+      overflow-x: auto;
+      margin: 16px 0;
+    }
+    .flow-node {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+    .flow-icon {
+      font-size: 26px;
+      line-height: 1;
+    }
+    .flow-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--dark);
+      text-align: center;
+      white-space: nowrap;
+    }
+    .flow-sub {
+      font-size: 11px;
+      color: var(--dark60);
+      text-align: center;
+      white-space: nowrap;
+    }
+    .flow-arrow {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      min-width: 48px;
+      padding: 0 4px;
+    }
+    .flow-arrow-line {
+      width: 100%;
+      height: 1.5px;
+      background: var(--dark30);
+      position: relative;
+    }
+    .flow-arrow-line::after {
+      content: "";
+      position: absolute;
+      right: -1px; top: -4px;
+      border-top: 5px solid transparent;
+      border-bottom: 5px solid transparent;
+      border-left: 7px solid var(--dark30);
+    }
+    .flow-arrow-label {
+      font-size: 10px;
+      color: var(--dark60);
+      white-space: nowrap;
+    }
+
+    /* ── Storage table pill ── */
+    .pill {
+      display: inline-block;
+      font-size: 11px; font-weight: 600;
+      padding: 2px 8px; border-radius: 20px;
+      vertical-align: middle;
+    }
+    .pill-yes  { background: rgba(34,180,90,.12); color: #1a9048; }
+    .pill-no   { background: rgba(220,50,50,.10); color: #b92b2b; }
+    .pill-local { background: rgba(105,111,123,.10); color: var(--dark); }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">ntf<span>.</span></a>
+    <a href="docs.html">Docs</a>
+    <a href="guides.html">Guides</a>
+    <a href="how-it-works.html" class="active">How it works</a>
+    <a href="privacy.html">Privacy</a>
+  </div>
+</nav>
+
+<main>
+  <div class="hero" style="padding-bottom: 32px;">
+    <h1 style="font-size: clamp(32px,6vw,46px);">How Notifikations works</h1>
+    <p>Private by design. Your raw secret never leaves your device — here's exactly what happens when you send a notification.</p>
+  </div>
+
+  <!-- ── Delivery flow ─────────────────────────────────────────── -->
+  <h2 style="border-top:none; padding-top:0; margin-top:0;">The delivery path</h2>
+  <p>Every notification takes the same route from the sender to your screen:</p>
+
+  <div class="flow">
+    <div class="flow-node">
+      <div class="flow-icon">💻</div>
+      <div class="flow-label">Your script</div>
+      <div class="flow-sub">curl / Python / CI</div>
+    </div>
+    <div class="flow-arrow">
+      <div class="flow-arrow-line"></div>
+      <div class="flow-arrow-label">HTTPS POST</div>
+    </div>
+    <div class="flow-node">
+      <div class="flow-icon">⚡️</div>
+      <div class="flow-label">Cloudflare Worker</div>
+      <div class="flow-sub">verifies &amp; routes</div>
+    </div>
+    <div class="flow-arrow">
+      <div class="flow-arrow-line"></div>
+      <div class="flow-arrow-label">HTTP/2 + JWT</div>
+    </div>
+    <div class="flow-node">
+      <div class="flow-icon">🍎</div>
+      <div class="flow-label">Apple APNs</div>
+      <div class="flow-sub">push infrastructure</div>
+    </div>
+    <div class="flow-arrow">
+      <div class="flow-arrow-line"></div>
+      <div class="flow-arrow-label">push token</div>
+    </div>
+    <div class="flow-node">
+      <div class="flow-icon">📱</div>
+      <div class="flow-label">Your iPhone</div>
+      <div class="flow-sub">notification arrives</div>
+    </div>
+  </div>
+
+  <!-- ── Webhook URL ──────────────────────────────────────────── -->
+  <h2>Your webhook URL</h2>
+  <p>When you first open the app, a <strong>webhook secret</strong> is generated on-device using a cryptographically secure random number generator. It never leaves your device in plaintext.</p>
+  <p>You get two webhook URLs:</p>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <h3>Device webhook</h3>
+        <p>Sends a notification to this device only. Each device has its own unique secret.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <h3>User webhook</h3>
+        <p>Sends to every device signed in to your iCloud account at once — fan-out delivery. The response includes a <code>sent</code> count.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── What's stored ─────────────────────────────────────────── -->
+  <h2>What gets stored — and where</h2>
+  <p>The backend stores the minimum required to route a notification. Here's the complete picture:</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Data</th>
+          <th>Stored by backend</th>
+          <th>Where</th>
+          <th>Purpose</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>APNs push token <sup>1</sup></td>
+          <td><span class="pill pill-yes">yes</span></td>
+          <td>Cloudflare KV</td>
+          <td>Required to address the notification to your device</td>
+        </tr>
+        <tr>
+          <td>SHA-256 digest of device secret</td>
+          <td><span class="pill pill-yes">yes</span></td>
+          <td>Cloudflare KV</td>
+          <td>Verifies incoming webhook requests without storing the secret</td>
+        </tr>
+        <tr>
+          <td>SHA-256 digest of user secret</td>
+          <td><span class="pill pill-yes">yes</span></td>
+          <td>Cloudflare KV</td>
+          <td>Fan-out: maps one user webhook to all their devices</td>
+        </tr>
+        <tr>
+          <td>Device label (optional)</td>
+          <td><span class="pill pill-yes">yes</span></td>
+          <td>Cloudflare KV</td>
+          <td>Human-readable name (e.g. "iPhone 15 Pro")</td>
+        </tr>
+        <tr>
+          <td>Raw webhook secret</td>
+          <td><span class="pill pill-no">never</span></td>
+          <td>Your device + iCloud</td>
+          <td>Generated on-device, synced only through your private CloudKit database</td>
+        </tr>
+        <tr>
+          <td>Notification contents</td>
+          <td><span class="pill pill-no">never</span></td>
+          <td>—</td>
+          <td>Pass through in-flight only, never logged or persisted</td>
+        </tr>
+        <tr>
+          <td>Notification history</td>
+          <td><span class="pill pill-local">device only</span></td>
+          <td>On-device (SwiftData)</td>
+          <td>Stored locally so you can review missed notifications</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="muted"><sup>1</sup> An APNs push token is a unique, random code Apple gives to each app install so the system knows exactly which device to deliver a notification to — without identifying who you are.</p>
+
+  <!-- ── How verification works ─────────────────────────────────── -->
+  <h2>How verification works</h2>
+  <p>When a webhook request arrives at <code>/api/v1/:secret</code>, the worker:</p>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <h3>Hashes the secret</h3>
+        <p>Computes <code>SHA-256(secret)</code> from the URL path. This is the only operation performed on your raw secret — it never touches a database or log.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <h3>Looks up the digest</h3>
+        <p>Checks Cloudflare KV for a matching digest. If none found, returns <code>404 webhook not found</code>.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <h3>Retrieves the push token</h3>
+        <p>The KV record links the digest to an APNs push token. No secret is stored — only the hash and the token.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-body">
+        <h3>Forwards to APNs</h3>
+        <p>The notification payload is signed with the APNs key and sent to Apple. Apple handles delivery, retries, and queuing.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Rotating secrets ──────────────────────────────────────── -->
+  <h2>Rotating secrets</h2>
+  <p>If you want to invalidate your current webhook URL and get a new one:</p>
+  <ul>
+    <li>The app generates a new secret on-device.</li>
+    <li>Only the <strong>new digest</strong> and the <strong>old digest</strong> are sent to the server — the raw secret is never transmitted.</li>
+    <li>The server atomically replaces the old digest with the new one. The old URL stops working immediately.</li>
+  </ul>
+  <div class="callout">
+    A database breach would not expose your webhook URL — only SHA-256 hashes are stored, and SHA-256 is a one-way function.
+  </div>
+
+  <!-- ── CloudKit ──────────────────────────────────────────────── -->
+  <h2>Syncing across devices</h2>
+  <p>Your raw webhook secrets are stored in your <strong>iCloud private database</strong> via CloudKit. This data:</p>
+  <ul>
+    <li>Is tied to your personal iCloud account</li>
+    <li>Is end-to-end encrypted by Apple</li>
+    <li>Is inaccessible to the Notifikations backend</li>
+    <li>Is automatically deleted when you delete the app</li>
+  </ul>
+  <p>This is how the same user webhook URL works across all your devices — each device registers independently, but they all share the same user secret from CloudKit.</p>
+
+  <!-- ── Infrastructure ───────────────────────────────────────── -->
+  <h2>Infrastructure</h2>
+  <div class="cards">
+    <div class="card">
+      <div class="card-icon">⚡️</div>
+      <h3>Cloudflare Workers</h3>
+      <p>Webhook verification and APNs forwarding. Runs at the edge, close to the sender.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🗄️</div>
+      <h3>Cloudflare KV</h3>
+      <p>Stores push tokens and secret digests. Globally replicated, low-latency reads.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">☁️</div>
+      <h3>Apple CloudKit</h3>
+      <p>Stores your raw secrets in your private iCloud database. Not accessible to us.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🍎</div>
+      <h3>Apple APNs</h3>
+      <p>Handles final delivery, retries, and queuing to your device over HTTP/2.</p>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <p>ntf · <a href="index.html">Home</a> · <a href="docs.html">Docs</a> · <a href="guides.html">Guides</a> · <a href="privacy.html">Privacy</a> · <a href="mailto:hello@notifikations.com">Contact</a></p>
+</footer>
+
+</body>
+</html>
