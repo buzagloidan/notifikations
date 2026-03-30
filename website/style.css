@@ -116,6 +116,49 @@ main { max-width: var(--max); margin: 0 auto; padding: 0 24px 80px; }
 }
 .btn-outline:hover { background: var(--tan); }
 
+/* ── Skill download badge ─────────────────────────────────────────── */
+.skill-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  background: rgba(255,174,83,.10);
+  border: 1px solid rgba(255,174,83,.38);
+  border-radius: 100px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--dark);
+  text-decoration: none;
+  align-self: flex-start;
+  transition: background .15s;
+}
+.skill-badge:hover { background: rgba(255,174,83,.22); }
+.skill-badge-dot {
+  position: relative;
+  display: flex;
+  width: 9px;
+  height: 9px;
+  flex-shrink: 0;
+}
+.skill-badge-dot-ping {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: var(--sage);
+  opacity: .7;
+  animation: skill-ping 1.6s cubic-bezier(0,0,.2,1) infinite;
+}
+.skill-badge-dot-inner {
+  position: relative;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--sage);
+}
+@keyframes skill-ping {
+  75%, 100% { transform: scale(2.2); opacity: 0; }
+}
+
 /* ── Code block ───────────────────────────────────────────────────── */
 .code-block {
   background: var(--tan);
