@@ -1,0 +1,53 @@
+{
+  "name": "n8n-nodes-notifikations",
+  "version": "0.1.0",
+  "description": "n8n community node for Notifikations — send iPhone push notifications via a single webhook call",
+  "keywords": [
+    "n8n-community-node-package",
+    "n8n",
+    "notification",
+    "push",
+    "iphone",
+    "ios",
+    "webhook"
+  ],
+  "license": "MIT",
+  "homepage": "https://notifikations.com",
+  "author": {
+    "name": "Notifikations",
+    "email": "hello@notifikations.com",
+    "url": "https://notifikations.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/buzagloidan/notifikations",
+    "directory": "n8n-node"
+  },
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc && copyfiles -u 1 'nodes/**/*.svg' dist/",
+    "dev": "tsc --watch",
+    "prepublishOnly": "npm run build"
+  },
+  "files": [
+    "dist"
+  ],
+  "n8n": {
+    "n8nNodesApiVersion": 1,
+    "credentials": [
+      "dist/credentials/NotifikationsApi.credentials.js"
+    ],
+    "nodes": [
+      "dist/nodes/Notifikations/Notifikations.node.js"
+    ]
+  },
+  "devDependencies": {
+    "@types/node": "^18.0.0",
+    "copyfiles": "^2.4.1",
+    "n8n-workflow": "^1.0.0",
+    "typescript": "^5.0.0"
+  },
+  "peerDependencies": {
+    "n8n-workflow": "*"
+  }
+}
