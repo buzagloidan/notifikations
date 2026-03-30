@@ -1,0 +1,75 @@
+name: Notifications
+options:
+  bundleIdPrefix: com.idanbu
+  deploymentTarget:
+    iOS: "18.0"
+  xcodeVersion: "16.0"
+
+settings:
+  SWIFT_VERSION: "5.9"
+  MARKETING_VERSION: "1.3"
+  CURRENT_PROJECT_VERSION: "11"
+  INFOPLIST_KEY_CFBundleDisplayName: Notifikations
+
+packages:
+  RevenueCat:
+    url: https://github.com/RevenueCat/purchases-ios-spm.git
+    exactVersion: 5.67.0
+
+targets:
+  Notifications:
+    type: application
+    platform: iOS
+    bundleId: com.idanbu.notifications
+    configFiles:
+      Debug: Config/Secrets.xcconfig
+      Release: Config/Secrets.xcconfig
+    sources:
+      - Notifications
+    dependencies:
+      - package: RevenueCat
+        product: RevenueCat
+      - package: RevenueCat
+        product: RevenueCatUI
+    info:
+      path: Notifications/Info.plist
+      properties:
+        UILaunchScreen: {}
+        RevenueCatAPIKeyDebug: $(REVENUECAT_API_KEY_DEBUG)
+        RevenueCatAPIKey: $(REVENUECAT_API_KEY_RELEASE)
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+        UIRequiresFullScreen: true
+        UIBackgroundModes:
+          - remote-notification
+    entitlements:
+      path: Notifications/Notifications.entitlements
+      properties:
+        aps-environment: production
+        com.apple.developer.icloud-services:
+          - CloudKit
+        com.apple.developer.icloud-container-identifiers:
+          - iCloud.com.idanbu.notifications
+    settings:
+      PRODUCT_BUNDLE_IDENTIFIER: com.idanbu.notifications
+      ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+      PRODUCT_NAME: Notifikations
+      DEVELOPMENT_TEAM: ZADSZ6HP53
+      CODE_SIGN_STYLE: Automatic
+
+  NotificationsService:
+    type: app-extension
+    platform: iOS
+    bundleId: com.idanbu.notifications.NotificationService
+    sources:
+      - NotificationsServiceExtension
+    info:
+      path: NotificationsServiceExtension/Info.plist
+      properties:
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.usernotifications.service
+          NSExtensionPrincipalClass: $(PRODUCT_MODULE_NAME).NotificationService
+    settings:
+      PRODUCT_BUNDLE_IDENTIFIER: com.idanbu.notifications.NotificationService
+      DEVELOPMENT_TEAM: ZADSZ6HP53
+      CODE_SIGN_STYLE: Automatic

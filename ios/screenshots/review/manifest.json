@@ -1,0 +1,93 @@
+{
+  "generated_at": "2026-03-28T19:04:56Z",
+  "raw_dir": "/Users/idanbu/Desktop/notifications/ios/screenshots/raw/iphone",
+  "framed_dir": "/Users/idanbu/Desktop/notifications/ios/screenshots/framed",
+  "output_dir": "/Users/idanbu/Desktop/notifications/ios/screenshots/review",
+  "approval_path": "/Users/idanbu/Desktop/notifications/ios/screenshots/review/approved.json",
+  "summary": {
+    "total": 4,
+    "ready": 4,
+    "missing_raw": 0,
+    "invalid_size": 0,
+    "approved": 0,
+    "pending_approval": 4
+  },
+  "entries": [
+    {
+      "key": "|iphone|01-home-iphone-17-pro-max",
+      "screenshot_id": "01-home-iphone-17-pro-max",
+      "device": "iphone",
+      "framed_path": "/Users/idanbu/Desktop/notifications/ios/screenshots/framed/iphone/01-home-iphone-17-pro-max.png",
+      "framed_relative_path": "iphone/01-home-iphone-17-pro-max.png",
+      "raw_path": "/Users/idanbu/Desktop/notifications/ios/screenshots/raw/iphone/01-home-iphone-17-pro-max.png",
+      "raw_relative_path": "01-home-iphone-17-pro-max.png",
+      "width": 1320,
+      "height": 2868,
+      "display_types": [
+        "APP_IPHONE_67",
+        "APP_IPHONE_69"
+      ],
+      "valid_app_store_size": true,
+      "status": "ready",
+      "approved": false,
+      "approval_state": "pending"
+    },
+    {
+      "key": "|iphone|02-webhook-url-iphone-17-pro-max",
+      "screenshot_id": "02-webhook-url-iphone-17-pro-max",
+      "device": "iphone",
+      "framed_path": "/Users/idanbu/Desktop/notifications/ios/screenshots/framed/iphone/02-webhook-url-iphone-17-pro-max.png",
+      "framed_relative_path": "iphone/02-webhook-url-iphone-17-pro-max.png",
+      "raw_path": "/Users/idanbu/Desktop/notifications/ios/screenshots/raw/iphone/02-webhook-url-iphone-17-pro-max.png",
+      "raw_relative_path": "02-webhook-url-iphone-17-pro-max.png",
+      "width": 1320,
+      "height": 2868,
+      "display_types": [
+        "APP_IPHONE_67",
+        "APP_IPHONE_69"
+      ],
+      "valid_app_store_size": true,
+      "status": "ready",
+      "approved": false,
+      "approval_state": "pending"
+    },
+    {
+      "key": "|iphone|03-history-iphone-17-pro-max",
+      "screenshot_id": "03-history-iphone-17-pro-max",
+      "device": "iphone",
+      "framed_path": "/Users/idanbu/Desktop/notifications/ios/screenshots/framed/iphone/03-history-iphone-17-pro-max.png",
+      "framed_relative_path": "iphone/03-history-iphone-17-pro-max.png",
+      "raw_path": "/Users/idanbu/Desktop/notifications/ios/screenshots/raw/iphone/03-history-iphone-17-pro-max.png",
+      "raw_relative_path": "03-history-iphone-17-pro-max.png",
+      "width": 1320,
+      "height": 2868,
+      "display_types": [
+        "APP_IPHONE_67",
+        "APP_IPHONE_69"
+      ],
+      "valid_app_store_size": true,
+      "status": "ready",
+      "approved": false,
+      "approval_state": "pending"
+    },
+    {
+      "key": "|iphone|04-api-docs-iphone-17-pro-max",
+      "screenshot_id": "04-api-docs-iphone-17-pro-max",
+      "device": "iphone",
+      "framed_path": "/Users/idanbu/Desktop/notifications/ios/screenshots/framed/iphone/04-api-docs-iphone-17-pro-max.png",
+      "framed_relative_path": "iphone/04-api-docs-iphone-17-pro-max.png",
+      "raw_path": "/Users/idanbu/Desktop/notifications/ios/screenshots/raw/iphone/04-api-docs-iphone-17-pro-max.png",
+      "raw_relative_path": "04-api-docs-iphone-17-pro-max.png",
+      "width": 1320,
+      "height": 2868,
+      "display_types": [
+        "APP_IPHONE_67",
+        "APP_IPHONE_69"
+      ],
+      "valid_app_store_size": true,
+      "status": "ready",
+      "approved": false,
+      "approval_state": "pending"
+    }
+  ]
+}

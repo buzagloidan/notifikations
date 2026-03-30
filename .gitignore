@@ -42,6 +42,9 @@ DerivedData/
 # ASC / release tool state
 .asc/
 
+# iOS build artifacts (archives, exports)
+ios/.build/
+
 # Logs
 *.log
 npm-debug.log*
