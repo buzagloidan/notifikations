@@ -127,14 +127,30 @@
   -d <span class="hl">'Build finished ✅'</span></pre>
   </div>
 
-  <section class="how-it-works-graphic" aria-labelledby="how-it-works">
-    <h2 id="how-it-works" class="visually-hidden">How it works</h2>
-    <div class="how-it-works-breakout">
-      <figure class="how-it-works-figure">
-        <img src="how-it-works.png" alt="How it works in three steps: install the app, copy your webhook URL, and send from anywhere." loading="lazy">
-      </figure>
+  <h2>How it works</h2>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <h3>Install the app</h3>
+        <p>The iOS app generates a unique webhook secret on-device and registers your device's push token with the backend. Your raw secret never leaves your device.</p>
+      </div>
     </div>
-  </section>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <h3>Copy your webhook URL</h3>
+        <p>You get two webhook URLs — one that targets only this device, and one that targets all devices signed in with the same iCloud account.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <h3>Send from anywhere</h3>
+        <p>POST to your URL with a plain text body, a JSON payload, or just query parameters. No API key, no auth header — the secret in the URL is the credential.</p>
+      </div>
+    </div>
+  </div>
 
   <h2>Built for AI agents</h2>
   <p>When you kick off a long task with Claude Code, Langflow, Agno, or any LLM-powered pipeline, you should know the moment it finishes — even if you've left your desk. Because Notifikations is a plain HTTP call with no SDK or auth setup, any agent that can run a shell command or make a web request can send you a push notification. <a href="guides.html#claude">See the Claude Code guide →</a></p>
