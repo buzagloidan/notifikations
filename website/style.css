@@ -211,6 +211,47 @@ h2 {
 h2:first-child { border-top: none; padding-top: 0; margin-top: 0; }
 h3 { font-size: 18px; font-weight: 600; margin-bottom: 10px; }
 
+/* ── Accessible hidden text ───────────────────────────────────────── */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ── How it works image ───────────────────────────────────────────── */
+.how-it-works-graphic {
+  margin-top: 56px;
+  padding-top: 56px;
+  border-top: 1px solid var(--tan);
+}
+
+.how-it-works-breakout {
+  width: 100%;
+}
+
+.how-it-works-figure {
+  margin: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  border-radius: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.how-it-works-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
 /* ── Cards ────────────────────────────────────────────────────────── */
 .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; }
 .card {
@@ -373,4 +414,15 @@ footer a { color: var(--dark60); text-decoration: underline; }
   .hero { padding: 56px 0 48px; }
   nav a:not(.nav-logo) { display: none; }
   .cards { grid-template-columns: 1fr 1fr; }
+  .how-it-works-graphic {
+    margin-top: 48px;
+    padding-top: 48px;
+  }
+  .how-it-works-breakout {
+    width: 100%;
+  }
+  .how-it-works-figure img {
+    width: 820px;
+    max-width: none;
+  }
 }
