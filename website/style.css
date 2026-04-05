@@ -249,6 +249,103 @@ a.integration-chip:hover {
   border-color: var(--dark60);
 }
 
+/* ── Integrations carousel ────────────────────────────────────────── */
+.integrations-carousel {
+  margin: 40px -24px 0;
+  padding: 28px 0;
+  border-top: 1px solid var(--tan);
+}
+
+.carousel-label {
+  text-align: center;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--dark30);
+  margin-bottom: 16px;
+}
+
+.carousel-outer {
+  position: relative;
+  overflow: hidden;
+}
+
+.carousel-outer::before,
+.carousel-outer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 64px;
+  z-index: 2;
+  pointer-events: none;
+}
+.carousel-outer::before {
+  left: 0;
+  background: linear-gradient(to right, var(--cream), transparent);
+}
+.carousel-outer::after {
+  right: 0;
+  background: linear-gradient(to left, var(--cream), transparent);
+}
+
+.carousel-track {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: max-content;
+  padding: 4px 10px;
+  animation: scroll-logos 26s linear infinite;
+}
+.carousel-track:hover { animation-play-state: paused; }
+
+@keyframes scroll-logos {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.logo-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px 8px 10px;
+  background: var(--cream);
+  border: 1px solid var(--dark30);
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--dark);
+  white-space: nowrap;
+  user-select: none;
+  transition: background .15s, border-color .15s, box-shadow .15s;
+}
+.logo-chip--wordmark {
+  padding: 8px 18px;
+}
+.logo-chip:hover {
+  background: var(--tan);
+  border-color: var(--dark60);
+  box-shadow: 0 2px 8px rgba(0,0,0,.06);
+}
+.chip-icon {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  object-fit: contain;
+}
+.chip-wordmark {
+  height: 22px;
+  width: auto;
+  max-width: 90px;
+  flex-shrink: 0;
+  object-fit: contain;
+}
+.chip-wordmark--square {
+  height: 24px;
+  max-width: 24px;
+}
+
 /* ── Steps ────────────────────────────────────────────────────────── */
 .steps { display: flex; flex-direction: column; gap: 16px; }
 .step { display: flex; gap: 16px; align-items: flex-start; }
