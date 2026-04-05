@@ -115,6 +115,13 @@ main { max-width: var(--max); margin: 0 auto; padding: 0 24px 80px; }
   background: transparent;
 }
 .btn-outline:hover { background: var(--tan); }
+.appstore-btn {
+  display: inline-flex;
+  transition: opacity .15s, transform .1s;
+}
+.appstore-btn:active { transform: scale(.97); }
+.appstore-btn:hover { opacity: .85; }
+.appstore-btn img { display: block; }
 
 /* ── Skill download badge ─────────────────────────────────────────── */
 .skill-badge {
