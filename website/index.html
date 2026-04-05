@@ -214,7 +214,32 @@
   </div>
 
   <h2>Built for AI agents</h2>
-  <p>When you kick off a long task with Claude Code, Langflow, Agno, or any LLM-powered pipeline, you should know the moment it finishes — even if you've left your desk. Because Notifikations is a plain HTTP call with no SDK or auth setup, any agent that can run a shell command or make a web request can send you a push notification. <a href="guides.html#claude">See the Claude Code guide →</a></p>
+  <p>You kicked off a long job and walked away. How do you know when it's done?</p>
+  <div class="agent-cards">
+    <div class="agent-card">
+      <div class="agent-card-header">
+        <span class="agent-name">Claude Code</span>
+        <span class="agent-tag">Most popular</span>
+      </div>
+      <p>Drop one line at the end of any prompt and get pinged the moment your session finishes — no polling, no checking back.</p>
+      <a href="guides.html#claude" class="agent-link">See the guide →</a>
+    </div>
+    <div class="agent-card">
+      <div class="agent-card-header">
+        <span class="agent-name">OpenClaw</span>
+      </div>
+      <p>Trigger a notification when any agent run completes, errors out, or hits a checkpoint. One HTTP step, no plugin required.</p>
+      <a href="guides.html#openclaw" class="agent-link">See the guide →</a>
+    </div>
+    <div class="agent-card">
+      <div class="agent-card-header">
+        <span class="agent-name">n8n</span>
+      </div>
+      <p>Add an HTTP Request node at any point in your workflow. Works with n8n Cloud and self-hosted — no credentials to configure.</p>
+      <a href="guides.html#n8n" class="agent-link">See the guide →</a>
+    </div>
+  </div>
+  <p class="muted" style="margin-top:16px;">Any tool that can make an HTTP request works — Zapier, Make, Langflow, Agno, cron jobs, CI pipelines, and more.</p>
 
   <h2>FAQ</h2>
   <div class="faq">
