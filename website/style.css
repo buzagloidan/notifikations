@@ -529,7 +529,9 @@ footer a { color: var(--dark60); text-decoration: underline; }
 /* ── Responsive ───────────────────────────────────────────────────── */
 @media (max-width: 540px) {
   .hero { padding: 56px 0 48px; }
-  .nav-inner { gap: 0; flex-wrap: wrap; }
-  nav a:not(.nav-logo) { font-size: 13px; padding: 5px 8px; }
+  nav { overflow-x: auto; }
+  .nav-inner { gap: 4px; flex-wrap: nowrap; width: max-content; min-width: 100%; }
+  .nav-logo { margin-right: 8px; }
+  nav a:not(.nav-logo) { font-size: 13px; padding: 5px 10px; white-space: nowrap; }
   .cards { grid-template-columns: 1fr 1fr; }
 }
