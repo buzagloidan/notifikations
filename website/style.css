@@ -256,6 +256,60 @@ a.integration-chip:hover {
   border-color: var(--dark60);
 }
 
+/* ── Agent cards ──────────────────────────────────────────────────── */
+.agent-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 20px;
+}
+.agent-card {
+  background: var(--tan);
+  border-radius: var(--radius);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.agent-card-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.agent-name {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--dark);
+}
+.agent-tag {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: var(--sage);
+  color: var(--cream);
+}
+.agent-card p {
+  font-size: 14px;
+  color: var(--dark60);
+  line-height: 1.6;
+  margin: 0;
+  flex: 1;
+}
+.agent-link {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--dark);
+  text-decoration: none;
+  margin-top: 4px;
+}
+.agent-link:hover { text-decoration: underline; }
+
+@media (max-width: 540px) {
+  .agent-cards { grid-template-columns: 1fr; }
+}
+
 /* ── Integrations carousel ────────────────────────────────────────── */
 .integrations-carousel {
   margin: 40px -24px 0;
