@@ -68,6 +68,12 @@ nav a:hover, nav a.active {
   background: var(--tan);
   color: var(--dark);
 }
+.nav-github {
+  display: flex;
+  align-items: center;
+  padding: 6px 8px;
+}
+.nav-github svg { display: block; }
 
 /* ── Layout ───────────────────────────────────────────────────────── */
 main { max-width: var(--max); margin: 0 auto; padding: 0 24px 80px; }
