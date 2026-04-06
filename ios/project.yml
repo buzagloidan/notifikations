@@ -54,7 +54,7 @@ targets:
       PRODUCT_BUNDLE_IDENTIFIER: com.idanbu.notifications
       ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
       PRODUCT_NAME: Notifikations
-      DEVELOPMENT_TEAM: ZADSZ6HP53
+      DEVELOPMENT_TEAM: "" # Set to your Apple Developer Team ID
       CODE_SIGN_STYLE: Automatic
 
   NotificationsService:
@@ -71,5 +71,5 @@ targets:
           NSExtensionPrincipalClass: $(PRODUCT_MODULE_NAME).NotificationService
     settings:
       PRODUCT_BUNDLE_IDENTIFIER: com.idanbu.notifications.NotificationService
-      DEVELOPMENT_TEAM: ZADSZ6HP53
+      DEVELOPMENT_TEAM: "" # Set to your Apple Developer Team ID
       CODE_SIGN_STYLE: Automatic
