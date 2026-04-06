@@ -275,11 +275,11 @@
 				LastUpgradeCheck = 1600;
 				TargetAttributes = {
 					1829FF62CD6E5321DD949A33 = {
-						DevelopmentTeam = ZADSZ6HP53;
+						
 						ProvisioningStyle = Automatic;
 					};
 					E214EAD9C1667861BA43BEBC = {
-						DevelopmentTeam = ZADSZ6HP53;
+						
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -435,7 +435,7 @@
 				CODE_SIGN_ENTITLEMENTS = Notifications/Notifications.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = ZADSZ6HP53;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Notifications/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -518,7 +518,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = ZADSZ6HP53;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = NotificationsServiceExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -539,7 +539,7 @@
 				CODE_SIGN_ENTITLEMENTS = Notifications/Notifications.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = ZADSZ6HP53;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Notifications/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -556,7 +556,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = ZADSZ6HP53;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = NotificationsServiceExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
