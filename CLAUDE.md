@@ -1,7 +1,7 @@
 # Notifikations — Project Context
 
 ## Repo
-Private GitHub repo: `buzagloidan/notifikations`
+GitHub repo: `buzagloidan/notifikations`
 
 ## Structure
 - `ios/` — iOS app (Swift/SwiftUI, XcodeGen via `project.yml`)

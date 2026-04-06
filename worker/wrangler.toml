@@ -9,12 +9,12 @@ routes = [
 
 [[kv_namespaces]]
 binding = "NTF_KV"
-id = "727eac7e21cd4c0ea5b494d5c4e5b42d"
+id = "YOUR_KV_NAMESPACE_ID"
 # WARNING: preview_id must NOT equal id — using the same value makes `wrangler dev`
 # and preview deploys read/write the live production namespace.
 # Create a separate dev namespace: wrangler kv namespace create NTF_KV --preview
 # then replace the value below with the returned preview namespace ID.
-preview_id = "669a31a37f5644cbae2ba3aeb0d164bf"
+preview_id = "YOUR_KV_PREVIEW_NAMESPACE_ID"
 
 [triggers]
 crons = ["* * * * *"]

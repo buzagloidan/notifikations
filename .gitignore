@@ -42,6 +42,9 @@ DerivedData/
 # ASC / release tool state
 .asc/
 
+# Screenshot review artifacts (contain local absolute paths)
+ios/screenshots/review/
+
 # iOS build artifacts (archives, exports)
 ios/.build/
 
